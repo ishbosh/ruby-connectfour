@@ -23,7 +23,7 @@ class Game
     loop do
       show_board
       take_turn
-      break if board.game_over?
+      break if game_over?
 
     end
   end
@@ -61,6 +61,13 @@ class Game
   def show_board
     board.show
   end
+
+  def game_over?
+    return true if board.full? || board.winner?
+
+    false
+  end
+
   
 # what do we need:
 # 2 players
