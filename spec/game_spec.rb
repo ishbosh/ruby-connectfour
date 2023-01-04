@@ -17,16 +17,16 @@ describe Game do
 
     context 'when game is over' do
       it 'exits loop' do
-        allow(game.board).to receive(:game_over?).and_return true
-        expect(game.board).to receive(:game_over?).once
+        allow(game).to receive(:game_over?).and_return true
+        expect(game).to receive(:game_over?).once
         game.game_loop
       end
     end
     
     context 'until game is over' do
       it 'loops multiple times' do
-        allow(game.board).to receive(:game_over?).and_return(false, false, true)
-        expect(game.board).to receive(:game_over?).exactly(3).times
+        allow(game).to receive(:game_over?).and_return(false, false, true)
+        expect(game).to receive(:game_over?).exactly(3).times
         game.game_loop
       end
     end
@@ -123,6 +123,35 @@ describe Game do
     it 'sends show to the board' do
       expect(game.board).to receive(:show)
       game.show_board
+    end
+  end
+
+  describe '#game_over?' do
+    context 'when the board is full' do
+      it 'returns true' do
+        allow(game.board).to receive(:full?).and_return(true)
+        expect(game.game_over?).to be true
+      end
+    end
+
+    context 'when there is a winner' do
+      it 'returns true when player one wins' do
+        allow(game.board).to receive(:winner?).and_return(game.player_one)
+        expect(game.game_over?).to be true
+      end
+
+      it 'returns true when player two wins' do
+        allow(game.board).to receive(:winner?).and_return(game.player_two)
+        expect(game.game_over?).to be true
+      end
+    end
+
+    context 'when there is no winner and the board is not full' do
+      it 'returns false' do
+        allow(game.board).to receive(:full?).and_return(false)
+        allow(game.board).to receive(:winner?).and_return(nil)
+        expect(game.game_over?).to be false
+      end
     end
   end
 end
