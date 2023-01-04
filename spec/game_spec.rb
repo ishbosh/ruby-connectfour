@@ -26,4 +26,34 @@ describe Game do
       end
     end
   end
+
+  describe '#take_turn' do
+    # public script method does not need testing - behavior of methods inside will be tested
+  end
+
+  describe '#update_current_turn' do
+    context 'when it is the first turn' do
+      it 'updates player turn to first player' do
+        game.update_current_turn
+        expect(game.current_turn).to be(game.player_one)
+      end
+    end
+
+    context 'when the last turn was player one' do
+      it 'updates player turn to second player' do
+        game.current_turn = game.player_one
+        game.update_current_turn
+        expect(game.current_turn).to be(game.player_two)
+      end
+    end
+
+    context 'when the last turn was player two' do
+      it 'updates player turn to first player' do
+        game.current_turn = game.player_two
+        game.update_current_turn
+        expect(game.current_turn).to be(game.player_one)
+      end
+    end
+  end
+
 end
