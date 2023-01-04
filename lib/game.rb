@@ -22,7 +22,6 @@ class Game
   def game_loop
     loop do
       show_board
-      update_current_turn
       take_turn(current_turn)
       break if board.game_over?
 
@@ -30,16 +29,26 @@ class Game
   end
 
   def take_turn(player)
+    validated_move = player_input
+    update_board(validated_move)
+    update_current_turn
   end
 
   def update_current_turn
-    current_turn == player_one ? player_two : player_one
+    self.current_turn = current_turn.eql?(player_one) ? player_two : player_one
+  end
+
+  def update_board(valid_move)
   end
 
   def player_input
     # accept input
     # validate input
     # return validated input
+  end
+
+  def show_board
+    board.show
   end
   
 # what do we need:
