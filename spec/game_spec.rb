@@ -12,6 +12,7 @@ describe Game do
   describe '#game_loop' do
     before do
       allow(game).to receive(:take_turn)
+      allow(game).to receive(:show_board)
     end
 
     context 'when game is over' do
@@ -117,10 +118,11 @@ describe Game do
       game.update_board(move)
     end
   end
+  
+  describe '#show_board' do
+    it 'sends show to the board' do
+      expect(game.board).to receive(:show)
+      game.show_board
+    end
+  end
 end
-
-
-    # it 'sends show to the board' do
-    #   expect(game.board).to receive(:show)
-    #   game.game_loop
-    # end
