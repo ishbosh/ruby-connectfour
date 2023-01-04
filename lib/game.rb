@@ -22,13 +22,13 @@ class Game
   def game_loop
     loop do
       show_board
-      take_turn(current_turn)
+      take_turn
       break if board.game_over?
 
     end
   end
 
-  def take_turn(player)
+  def take_turn
     validated_move = player_input
     update_board(validated_move)
     update_current_turn
@@ -38,13 +38,24 @@ class Game
     self.current_turn = current_turn.eql?(player_one) ? player_two : player_one
   end
 
-  def update_board(valid_move)
+  def player_input
+    loop do
+      input = gets.chomp
+      verified_move = verify_input(input)
+      return verified_move if verified_move
+
+      puts show_input_error
+    end
   end
 
-  def player_input
-    # accept input
-    # validate input
-    # return validated input
+  def verify_input(input)
+    if input.to_i.between?(1, 7)
+      return input #unless board.column_full?
+    end
+  end
+
+  def update_board(valid_move)
+    board.update(valid_move)
   end
 
   def show_board
