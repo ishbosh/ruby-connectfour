@@ -10,11 +10,7 @@ module DisplayText
   def show_column_numbers
     ' ' + (1..7).to_a.join(' ')
   end
-
-  def show_divider
-    '_____________'
-  end
-
+  
   def show_row(board_row)
     print '|'
     print board_row.join('|')
