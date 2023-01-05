@@ -9,8 +9,8 @@ class Game
 
   def initialize
     @board = Board.new
-    @player_one = Player.new
-    @player_two = Player.new
+    @player_one = Player.new(red_piece)
+    @player_two = Player.new(blue_piece)
     @current_turn = nil
   end
 
@@ -30,7 +30,7 @@ class Game
 
   def take_turn
     validated_move = player_input
-    update_board(validated_move)
+    update_board(validated_move, current_turn)
     update_current_turn
   end
 
@@ -50,12 +50,12 @@ class Game
 
   def verify_input(input)
     if input.to_i.between?(1, 7)
-      return input #unless board.column_full?
+      return (input.to_i - 1) #unless board.column_full?
     end
   end
 
-  def update_board(valid_move)
-    board.update(valid_move)
+  def update_board(valid_move, player)
+    board.update(valid_move, player.piece)
   end
 
   def show_board
