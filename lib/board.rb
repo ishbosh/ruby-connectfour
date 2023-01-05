@@ -68,19 +68,19 @@ class Board
     }
     new_row = origin.first + steps[direction].first
     new_col = origin.last + steps[direction].last
-    return count unless in_bounds(new_row, new_col) && matching_piece(new_row, new_col, piece)
+    return count unless in_bounds?(new_row, new_col) && matching_piece?(new_row, new_col, piece)
     
     count += 1
     count_adjacent_pieces(piece, [new_row, new_col], direction, count)
     count
   end
 
-  def in_bounds(row, col)
+  def in_bounds?(row, col)
     border = {top: 0, bot: 5, left: 0, right: 6}
     row.between?(border[:top], border[:bot]) && col.between?(border[:left], border[:right])
   end
 
-  def matching_piece(row, col, piece)
+  def matching_piece?(row, col, piece)
     grid[row][col].eql?(piece)
   end
 end
