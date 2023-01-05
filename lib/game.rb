@@ -25,13 +25,13 @@ class Game
       take_turn
       break if game_over?
 
+      update_current_turn
     end
   end
 
   def take_turn
     validated_move = player_input
     update_board(validated_move, current_turn)
-    update_current_turn
   end
 
   def update_current_turn
@@ -78,7 +78,6 @@ class Game
   def winning_player
     return 'tie' if tie_game?
 
-    winning_piece = board.grid[board.last_move.first, board.last_move.last]
-    winning_piece.eql?(player_one.piece) ? player_one : player_two
+    current_turn
   end
 end
