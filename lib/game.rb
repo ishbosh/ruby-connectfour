@@ -50,7 +50,8 @@ class Game
 
   def verify_input(input)
     if input.to_i.between?(1, 7)
-      return (input.to_i - 1) #unless board.column_full?
+      verified_input = input.to_i - 1
+      return verified_input if board.open_column?(verified_input)
     end
   end
 
