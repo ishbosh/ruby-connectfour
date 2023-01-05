@@ -1,10 +1,24 @@
 module DisplayText
   def show_intro
-    'Connect Four'
+    '- - - - Connect Four - - - -' \
+    "\n This is a Two player game."\
+    "\n Try to get four in a row."
   end
 
   def show_input_error
     'Invalid input - try again.'
+  end
+
+  def show_turn(player)
+    "\n #{player}'s turn. Choose a column number. \n"
+  end
+
+  def show_winner(player)
+    "\n ~ ~ #{player} wins! Great job! ~ ~ \n "
+  end
+
+  def show_tie
+    "\n ++ TIE GAME ++ \n "
   end
 
   def show_column_numbers
