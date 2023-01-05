@@ -33,10 +33,11 @@ class Board
   end
 
   def full?
-    return true unless grid[0].include?(blank_space)
+    grid.first.include?(blank_space) ? false : true
   end
 
-  def open_column?
+  def open_column?(column)
+    grid.first[column].eql?(blank_space)
   end
 
   def winner?
