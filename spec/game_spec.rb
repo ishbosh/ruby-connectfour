@@ -226,4 +226,35 @@ describe Game do
       end
     end
   end
+
+  describe '#announce_winner' do
+    before do
+      allow(game).to receive(:puts)
+      allow(game).to receive(:show_board)
+    end
+
+    context 'when it is a tie' do
+      it 'announces a tie game' do
+        allow(game).to receive(:winning_player).and_return('tie')
+        expect(game).to receive(:puts).with(game.show_tie)
+        game.announce_winner
+      end
+    end
+
+    context 'when player_one wins' do
+      it 'announces player one as the winner' do
+        allow(game).to receive(:winning_player).and_return(game.player_one)
+        expect(game).to receive(:puts).with(game.show_winner(game.player_one.name))
+        game.announce_winner
+      end
+    end
+
+    context 'when player_two wins' do
+      it 'announces player two as the winner' do
+        allow(game).to receive(:winning_player).and_return(game.player_two)
+        expect(game).to receive(:puts).with(game.show_winner(game.player_two.name))
+        game.announce_winner
+      end
+    end
+  end
 end
