@@ -11,7 +11,7 @@ class Board
 
   def show
     puts show_column_numbers
-    @grid.each do |row|
+    grid.each do |row|
       show_row(row)
     end
     puts show_column_numbers
@@ -23,11 +23,20 @@ class Board
   end
 
   def open_row(column)
-    # return lowest open row
+    open_spot = nil
+    grid.each_with_index do |row, i|
+      break unless row[column].eql?(blank_space)
+
+      open_spot = i
+    end
+    open_spot
   end
 
   def full?
-    return true unless @grid[0].include?(blank_space)
+    return true unless grid[0].include?(blank_space)
+  end
+
+  def open_column?
   end
 
   def winner?
