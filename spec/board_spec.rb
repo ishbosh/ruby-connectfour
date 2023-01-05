@@ -44,4 +44,19 @@ describe Board do
       end
     end
   end
+
+  describe '#open_row' do
+    context 'when first row is open' do
+      it 'returns first row' do
+        expect(board.open_row(0)).to eq(5)
+      end
+    end
+
+    context 'when first row is not open' do
+      it 'returns second row' do
+        board.grid[5][0] = board.red_piece
+        expect(board.open_row(0)).to eq(4)
+      end
+    end
+  end
 end
