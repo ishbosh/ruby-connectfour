@@ -5,14 +5,13 @@ require_relative 'display'
 class Game
   include DisplayText
 
-  attr_accessor :board, :current_turn, :player_one, :player_two, :last_move
+  attr_accessor :board, :current_turn, :player_one, :player_two
 
   def initialize
     @board = Board.new
     @player_one = Player.new(red_piece)
     @player_two = Player.new(blue_piece)
     @current_turn = nil
-    @last_move = nil
   end
 
   def play
@@ -31,7 +30,6 @@ class Game
 
   def take_turn
     validated_move = player_input
-    self.last_move = validated_move
     update_board(validated_move, current_turn)
     update_current_turn
   end
@@ -66,7 +64,7 @@ class Game
   end
 
   def game_over?
-    return true if board.full? || board.winner?(last_move)
+    return true if board.full? || board.winner?
 
     false
   end
