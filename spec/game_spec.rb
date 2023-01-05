@@ -114,8 +114,10 @@ describe Game do
   describe '#update_board' do
     it 'sends update to board with the move' do
       move = '1'
-      expect(game.board).to receive(:update).with(move)
-      game.update_board(move)
+      player = game.player_one
+      piece = player.piece
+      expect(game.board).to receive(:update).with(move, piece)
+      game.update_board(move, player)
     end
   end
   
