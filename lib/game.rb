@@ -69,7 +69,14 @@ class Game
     false
   end
 
-  
+  def tie_game?
+    true unless board.winner?
+  end
+
+  def winning_player
+    winning_piece = board.grid[board.last_move.first, board.last_move.last]
+    winning_piece.eql?(player_one.piece) ? player_one : player_two
+  end
 # what do we need:
 # 2 players
 # a game board
