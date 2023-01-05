@@ -59,4 +59,36 @@ describe Board do
       end
     end
   end
+
+  describe '#full?' do
+    context 'when full' do
+      it 'returns true' do
+        board.grid[0] = Array.new(7) { board.red_piece }
+        expect(board.full?).to be true
+      end
+    end
+
+    context 'when not full' do
+      it 'returns false' do
+        expect(board.full?).to be false
+      end
+    end
+  end
+
+  describe '#open_column?' do
+    context 'when column is open' do
+      it 'returns true' do
+        column = 0
+        expect(board.open_column?(column)).to be true
+      end
+    end
+
+    context 'when column is not open' do
+      it 'returns false' do
+        column = 5
+        board.grid = Array.new(6) { Array.new(7) { board.red_piece } }
+        expect(board.open_column?(column)).to be false
+      end
+    end
+  end
 end
