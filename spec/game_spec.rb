@@ -203,4 +203,27 @@ describe Game do
       end
     end
   end
+
+  describe '#winning_player' do
+    context 'when it is a tie' do
+      it 'returns \'tie\'' do
+        allow(game).to receive(:tie_game?).and_return(true)
+        expect(game.winning_player).to eq('tie')
+      end
+    end
+
+    context 'when player one was the last to play' do
+      it 'returns player_one' do
+        game.current_turn = game.player_one
+        expect(game.winning_player).to eq(game.player_one)
+      end
+    end
+
+    context 'when player two was the last to play' do
+      it 'returns player_two' do
+        game.current_turn = game.player_two
+        expect(game.winning_player).to eq(game.player_two)
+      end
+    end
+  end
 end
