@@ -70,22 +70,15 @@ class Game
   end
 
   def tie_game?
-    true unless board.winner?
+    return false unless board.full?
+
+    board.winner? ? false : true
   end
 
   def winning_player
+    return 'tie' if tie_game?
+
     winning_piece = board.grid[board.last_move.first, board.last_move.last]
     winning_piece.eql?(player_one.piece) ? player_one : player_two
   end
-# what do we need:
-# 2 players
-# a game board
-# player input
-# check for win or draw after each turn
-# display text
-# display the board each turn
-# update the board 
-# start the game
-# game loop
-
 end
