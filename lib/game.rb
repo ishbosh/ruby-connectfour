@@ -9,8 +9,8 @@ class Game
 
   def initialize
     @board = Board.new
-    @player_one = Player.new(red_piece)
-    @player_two = Player.new(blue_piece)
+    @player_one = Player.new(red_piece, 'Player One')
+    @player_two = Player.new(blue_piece, 'Player Two')
     @current_turn = nil
   end
 
@@ -21,15 +21,17 @@ class Game
 
   def game_loop
     loop do
+      update_current_turn
       show_board
       take_turn
       break if game_over?
 
-      update_current_turn
     end
+    announce_winner
   end
 
   def take_turn
+    show_turn(current_turn)
     validated_move = player_input
     update_board(validated_move, current_turn)
   end
@@ -79,5 +81,11 @@ class Game
     return 'tie' if tie_game?
 
     current_turn
+  end
+
+  def announce_winner
+    show_board # show final board
+    winner = winning_player
+    puts winner.eql?('tie') ? show_tie : show_winner(winner.name)
   end
 end
