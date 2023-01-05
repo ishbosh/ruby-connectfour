@@ -91,4 +91,22 @@ describe Board do
       end
     end
   end
+
+  describe '#winner?' do
+    win_threshold = 3
+
+    context 'when there is a winner' do
+      it 'returns true' do
+        allow(board).to receive(:best_line_count).with(win_threshold).and_return(3)
+        expect(board.winner?).to be true
+      end
+    end
+
+    context 'when there is not a winner' do
+      it 'returns false' do
+        allow(board).to receive(:best_line_count).with(win_threshold).and_return(2)
+        expect(board.winner?).to be false
+      end
+    end
+  end
 end
