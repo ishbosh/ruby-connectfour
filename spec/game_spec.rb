@@ -129,21 +129,26 @@ describe Game do
   end
 
   describe '#game_over?' do
-    context 'when the board is full' do
+    context 'when there is a winner and the board is not full' do
+      it 'returns true' do
+        allow(game.board).to receive(:full?).and_return(false)
+        allow(game.board).to receive(:winner?).and_return(true)
+        expect(game.game_over?).to be true
+      end
+    end
+    
+    context 'when there is a winner and the board is full' do
       it 'returns true' do
         allow(game.board).to receive(:full?).and_return(true)
+        allow(game.board).to receive(:winner?).and_return(true)
         expect(game.game_over?).to be true
       end
     end
 
-    context 'when there is a winner' do
-      it 'returns true when player one wins' do
-        allow(game.board).to receive(:winner?).and_return(game.player_one)
-        expect(game.game_over?).to be true
-      end
-
-      it 'returns true when player two wins' do
-        allow(game.board).to receive(:winner?).and_return(game.player_two)
+    context 'when there is no winner and the board is full' do
+      it 'returns true' do
+        allow(game.board).to receive(:full?).and_return(true)
+        allow(game.board).to receive(:winner?).and_return(false)
         expect(game.game_over?).to be true
       end
     end
@@ -151,7 +156,7 @@ describe Game do
     context 'when there is no winner and the board is not full' do
       it 'returns false' do
         allow(game.board).to receive(:full?).and_return(false)
-        allow(game.board).to receive(:winner?).and_return(nil)
+        allow(game.board).to receive(:winner?).and_return(false)
         expect(game.game_over?).to be false
       end
     end
