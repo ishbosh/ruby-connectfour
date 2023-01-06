@@ -1,6 +1,8 @@
-class Player
+# frozen_string_literal: true
 
-attr_accessor :piece, :name
+# Player Class Object
+class Player
+  attr_accessor :piece, :name
 
   def initialize(piece, name)
     @name = name

@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require_relative 'player'
 require_relative 'board'
 require_relative 'display'
 
+# Game class object
 class Game
   include DisplayText
 
@@ -25,7 +28,6 @@ class Game
       show_board
       take_turn
       break if game_over?
-
     end
     announce_winner
   end
@@ -52,10 +54,10 @@ class Game
   end
 
   def verify_input(input)
-    if input.to_i.between?(1, 7)
-      verified_input = input.to_i - 1
-      return verified_input if board.open_column?(verified_input)
-    end
+    return unless input.to_i.between?(1, 7)
+
+    verified_input = input.to_i - 1
+    return verified_input if board.open_column?(verified_input)
   end
 
   def update_board(valid_move, player)

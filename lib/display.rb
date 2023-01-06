@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# DisplayText support Module
 module DisplayText
   def show_intro
     "\n- - - - Connect Four - - - -" \
@@ -37,9 +40,9 @@ module DisplayText
   end
 
   def show_column_numbers
-    '       ' + (1..7).to_a.join(' ')
+    "       #{(1..7).to_a.join(' ')}"
   end
-  
+
   def show_row(board_row)
     print '      |'
     print board_row.join('|')
@@ -57,5 +60,4 @@ module DisplayText
   def blue_piece
     "\e[34m\u25c9\e[0m"
   end
-
 end

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'display'
 
+# Board class object
 class Board
   include DisplayText
 
@@ -11,7 +14,7 @@ class Board
   end
 
   def show
-    puts "\n" + show_column_numbers
+    puts "\n#{show_column_numbers}"
     grid.each do |row|
       show_row(row)
     end
@@ -21,7 +24,7 @@ class Board
   def update(column, piece)
     row = open_row(column)
     self.last_move = [row, column]
-    self.grid[row][column] = piece
+    grid[row][column] = piece
   end
 
   def open_row(column)
@@ -50,13 +53,12 @@ class Board
   def best_line_count(threshold, count = 0)
     player_piece = grid[last_move.first][last_move.last] # first is row, last is column
     # Directions array must keep this order! direction then opposite direction
-    directions = [:left, :right, :up, :down, :up_left, :down_right, :up_right, :down_left]
+    directions = %i[left right up down up_left down_right up_right down_left]
     # Check each direction and its opposite,and then reset the count to 0 after each pair checked
     directions.each_with_index do |dir, i|
       count = 0 if (i % 2).zero?
       count += count_adjacent_pieces(player_piece, last_move, dir)
       break if count >= threshold
-
     end
     count
   end
@@ -69,13 +71,13 @@ class Board
     new_row = origin.first + steps[direction].first
     new_col = origin.last + steps[direction].last
     return count unless in_bounds?(new_row, new_col) && matching_piece?(new_row, new_col, piece)
-    
+
     count += 1
     count_adjacent_pieces(piece, [new_row, new_col], direction, count)
   end
 
   def in_bounds?(row, col)
-    border = {top: 0, bot: 5, left: 0, right: 6}
+    border = { top: 0, bot: 5, left: 0, right: 6 }
     row.between?(border[:top], border[:bot]) && col.between?(border[:left], border[:right])
   end
 
