@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 require_relative '../lib/board'
+
+# rubocop:disable Metrics/BlockLength
 
 describe Board do
   subject(:board) { described_class.new }
@@ -142,7 +146,7 @@ describe Board do
     context 'when the next piece matches' do
       direction = :left
       let(:piece) { board.blank_space }
-      
+
       context 'and when the next step is out of bounds' do
         it 'does not recurse and keeps count at 0' do
           origin = [0, 0]
@@ -197,3 +201,4 @@ describe Board do
     # and that test would have failed if this method was not returning correctly
   end
 end
+# rubocop:enable Metrics/BlockLength

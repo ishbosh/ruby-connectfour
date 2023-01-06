@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require_relative '../lib/game'
 require_relative '../lib/board'
 
+# rubocop:disable Metrics/BlockLength
+
 describe Game do
-  
   subject(:game) { described_class.new }
 
   describe '#play' do
@@ -22,7 +25,7 @@ describe Game do
         game.game_loop
       end
     end
-    
+
     context 'until game is over' do
       it 'loops multiple times' do
         allow(game).to receive(:game_over?).and_return(false, false, true)
@@ -120,7 +123,7 @@ describe Game do
       game.update_board(move, player)
     end
   end
-  
+
   describe '#show_board' do
     it 'sends show to the board' do
       expect(game.board).to receive(:show)
@@ -136,7 +139,7 @@ describe Game do
         expect(game.game_over?).to be true
       end
     end
-    
+
     context 'when there is a winner and the board is full' do
       it 'returns true' do
         allow(game.board).to receive(:full?).and_return(true)
@@ -258,3 +261,4 @@ describe Game do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
