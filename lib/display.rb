@@ -22,9 +22,9 @@ module DisplayText
 
   def show_winner(player)
     if player.eql?('Player One')
-      "\n ~ ~ \e[31m#{player} wins! Great job!\e[0m ~ ~ \n "
+      "\n ~ \e[31m#{player} wins! Great job!\e[0m ~ \n "
     else
-      "\n ~ ~ \e[34m#{player} wins! Great job!\e[0m ~ ~ \n "
+      "\n ~ \e[34m#{player} wins! Great job!\e[0m ~ \n "
     end
   end
 
