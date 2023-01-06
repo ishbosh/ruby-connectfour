@@ -72,7 +72,6 @@ class Board
     
     count += 1
     count_adjacent_pieces(piece, [new_row, new_col], direction, count)
-    count
   end
 
   def in_bounds?(row, col)
