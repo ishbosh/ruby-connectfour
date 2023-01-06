@@ -43,7 +43,7 @@ class Board
   end
 
   def winner?
-    win_threshold = 3 # number of adjacent pieces to the origin piece to count for a win
+    win_threshold = 3
     best_line_count(win_threshold) >= win_threshold
   end
 
@@ -54,14 +54,14 @@ class Board
     # Check each direction and its opposite,and then reset the count to 0 after each pair checked
     directions.each_with_index do |dir, i|
       count = 0 if (i % 2).zero?
-      count += count_adjacent_pieces(player_piece, last_move, dir, count)
+      count += count_adjacent_pieces(player_piece, last_move, dir)
       break if count >= threshold
 
     end
     count
   end
 
-  def count_adjacent_pieces(piece, origin, direction, count)
+  def count_adjacent_pieces(piece, origin, direction, count = 0)
     steps = {
       left: [0, -1], right: [0, 1], up: [-1, 0], down: [1, 0],
       up_left: [-1, -1], up_right: [-1, 1], down_left: [1, -1], down_right: [1, 1]
