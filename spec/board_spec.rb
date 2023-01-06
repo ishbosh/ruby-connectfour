@@ -109,4 +109,81 @@ describe Board do
       end
     end
   end
+
+  describe '#best_line_count' do
+    context 'when there are 3 adjacent pieces' do
+      it 'returns 3' do
+        board.last_move = [0, 0]
+        allow(board).to receive(:count_adjacent_pieces).and_return(3)
+        expect(board.best_line_count(3)).to eq(3)
+      end
+    end
+
+    context 'when there are no adjacent pieces' do
+      it 'returns 0' do
+        board.last_move = [0, 0]
+        allow(board).to receive(:count_adjacent_pieces).and_return(0)
+        expect(board.best_line_count(3)).to eq(0)
+      end
+    end
+  end
+
+  describe '#count_adjacent_pieces' do
+    context 'when the next piece matches' do
+      direction = :left
+      let(:piece) { board.blank_space }
+      
+      context 'and when the next step is out of bounds' do
+        it 'does not recurse and keeps count at 0' do
+          origin = [0, 0]
+          count = 0
+          expect { count = board.count_adjacent_pieces(piece, origin, direction, count) }.not_to change { count }
+        end
+      end
+
+      context 'and when one step away from boundary' do
+        it 'recurses and adds to count once' do
+          origin = [0, 1]
+          count = 0
+          expect { count = board.count_adjacent_pieces(piece, origin, direction, count) }.to change { count }.to(1)
+        end
+      end
+
+      context 'and when two steps away from boundary' do
+        it 'recurses and adds to count twice' do
+          origin = [0, 2]
+          count = 0
+          expect { count = board.count_adjacent_pieces(piece, origin, direction, count) }.to change { count }.to(2)
+        end
+      end
+
+      context 'and when six steps away from boundary' do
+        it 'recurses and adds to count six times' do
+          origin = [0, 6]
+          count = 0
+          expect { count = board.count_adjacent_pieces(piece, origin, direction, count) }.to change { count }.to(6)
+        end
+      end
+    end
+
+    context 'when next piece does not match' do
+      it 'does not recurse and keeps count at 0' do
+        origin = [0, 1]
+        direction = :left
+        count = 0
+        piece = board.red_piece
+        expect { count = board.count_adjacent_pieces(piece, origin, direction, count) }.not_to change { count }
+      end
+    end
+  end
+
+  describe '#in_bounds?' do
+    # Not necessary to test, this was tested in #count_adjacent_pieces
+    # and that test would have failed if this method was not returning correctly
+  end
+
+  describe '#matching_piece?' do
+    # Not necessary to test, this was tested in #count_adjacent_pieces
+    # and that test would have failed if this method was not returning correctly
+  end
 end
