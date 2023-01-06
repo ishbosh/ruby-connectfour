@@ -15,7 +15,7 @@ class Game
   end
 
   def play
-    show_intro
+    puts show_intro
     game_loop
   end
 
@@ -31,7 +31,7 @@ class Game
   end
 
   def take_turn
-    show_turn(current_turn)
+    puts show_turn(current_turn.name)
     validated_move = player_input
     update_board(validated_move, current_turn)
   end
