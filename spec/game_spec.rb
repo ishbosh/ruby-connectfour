@@ -66,7 +66,7 @@ describe Game do
       it 'stops loop and does not display error message' do
         valid_input = '1'
         allow(game).to receive(:gets).and_return(valid_input)
-        expect(game).not_to receive(:puts).with(game.show_input_error)
+        expect(game).not_to receive(:print).with(game.show_input_error)
         game.player_input
       end
     end
@@ -79,7 +79,7 @@ describe Game do
       it 'shows the input error and does not return anything' do
         invalid_input = 'z'
         allow(game).to receive(:gets).and_return(invalid_input)
-        expect(game).to receive(:puts).with(game.show_input_error).once
+        expect(game).to receive(:print).with(game.show_input_error).once
         game.player_input
       end
     end
@@ -89,7 +89,7 @@ describe Game do
         invalid_input = 'a'
         valid_input = '2'
         allow(game).to receive(:gets).and_return(invalid_input, valid_input)
-        expect(game).to receive(:puts).with(game.show_input_error).once
+        expect(game).to receive(:print).with(game.show_input_error).once
         game.player_input
       end
     end
@@ -100,7 +100,7 @@ describe Game do
         invalid_two = '11'
         valid_input = '7'
         allow(game).to receive(:gets).and_return(invalid_one, invalid_two, valid_input)
-        expect(game).to receive(:puts).with(game.show_input_error).twice
+        expect(game).to receive(:print).with(game.show_input_error).twice
         game.player_input
       end
     end
