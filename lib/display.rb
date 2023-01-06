@@ -32,8 +32,8 @@ module DisplayText
     "\n ++ TIE GAME ++ \n "
   end
 
-  def show_turn_divider
-    "________________________________ \n\n "
+  def clear_display
+    puts "\e[H\e[2J"
   end
 
   def show_column_numbers

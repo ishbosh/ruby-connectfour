@@ -14,13 +14,13 @@ class Game
     @current_turn = nil
   end
 
-  def play
-    puts show_intro
+  def start
     game_loop
   end
 
   def game_loop
     loop do
+      puts show_intro
       update_current_turn
       show_board
       take_turn
@@ -34,7 +34,7 @@ class Game
     print show_turn(current_turn.name)
     validated_move = player_input
     update_board(validated_move, current_turn)
-    puts show_turn_divider
+    clear_display
   end
 
   def update_current_turn
