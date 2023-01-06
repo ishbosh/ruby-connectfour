@@ -47,7 +47,7 @@ class Game
       verified_move = verify_input(input)
       return verified_move if verified_move
 
-      puts show_input_error
+      print show_input_error
     end
   end
 

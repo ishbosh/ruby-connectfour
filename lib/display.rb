@@ -7,7 +7,7 @@ module DisplayText
   end
 
   def show_input_error
-    'Invalid input - try again.'
+    "\n Invalid input - try again: "
   end
 
   def show_turn(player)
