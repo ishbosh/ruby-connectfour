@@ -111,11 +111,21 @@ describe Board do
   end
 
   describe '#best_line_count' do
+    win_threshold = 3
+
+    context 'when there are 4 adjacent pieces' do
+      it 'returns 4' do
+        board.last_move = [0, 0]
+        allow(board).to receive(:count_adjacent_pieces).and_return(4)
+        expect(board.best_line_count(win_threshold)).to eq(4)
+      end
+    end
+
     context 'when there are 3 adjacent pieces' do
       it 'returns 3' do
-        board.last_move = [0, 0]
+        board.last_move = [0, 3]
         allow(board).to receive(:count_adjacent_pieces).and_return(3)
-        expect(board.best_line_count(3)).to eq(3)
+        expect(board.best_line_count(win_threshold)).to eq(3)
       end
     end
 
@@ -123,7 +133,7 @@ describe Board do
       it 'returns 0' do
         board.last_move = [0, 0]
         allow(board).to receive(:count_adjacent_pieces).and_return(0)
-        expect(board.best_line_count(3)).to eq(0)
+        expect(board.best_line_count(win_threshold)).to eq(0)
       end
     end
   end
