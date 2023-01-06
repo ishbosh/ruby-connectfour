@@ -15,7 +15,7 @@ class Board
     grid.each do |row|
       show_row(row)
     end
-    puts show_column_numbers + "\n "
+    puts show_column_numbers
   end
 
   def update(column, piece)

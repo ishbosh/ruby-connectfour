@@ -31,9 +31,10 @@ class Game
   end
 
   def take_turn
-    puts show_turn(current_turn.name)
+    print show_turn(current_turn.name)
     validated_move = player_input
     update_board(validated_move, current_turn)
+    puts show_turn_divider
   end
 
   def update_current_turn

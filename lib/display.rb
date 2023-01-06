@@ -1,8 +1,9 @@
 module DisplayText
   def show_intro
-    '- - - - Connect Four - - - -' \
-    "\n This is a Two player game."\
-    "\n Try to get four in a row."
+    "\n- - - - Connect Four - - - -" \
+    "\n This is a Two Player game." \
+    "\n Try to get four in a row." \
+    "\n- - - - - - -  - - - - - - -"
   end
 
   def show_input_error
@@ -10,23 +11,37 @@ module DisplayText
   end
 
   def show_turn(player)
-    "\n #{player}'s turn. Choose a column number. \n"
+    if player.eql?('Player One')
+      "\n - - \e[31m#{player}'s turn\e[0m - - " \
+      "\n  Choose a column number: "
+    else
+      "\n - - \e[34m#{player}'s turn\e[0m - - " \
+      "\n  Choose a column number: "
+    end
   end
 
   def show_winner(player)
-    "\n ~ ~ #{player} wins! Great job! ~ ~ \n "
+    if player.eql?('Player One')
+      "\n ~ ~ \e[31m#{player} wins! Great job!\e[0m ~ ~ \n "
+    else
+      "\n ~ ~ \e[34m#{player} wins! Great job!\e[0m ~ ~ \n "
+    end
   end
 
   def show_tie
     "\n ++ TIE GAME ++ \n "
   end
 
+  def show_turn_divider
+    "________________________________ \n\n "
+  end
+
   def show_column_numbers
-    ' ' + (1..7).to_a.join(' ')
+    '       ' + (1..7).to_a.join(' ')
   end
   
   def show_row(board_row)
-    print '|'
+    print '      |'
     print board_row.join('|')
     puts '|'
   end
