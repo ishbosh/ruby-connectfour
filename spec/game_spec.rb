@@ -168,14 +168,14 @@ describe Game do
         allow(game.board).to receive(:full?).and_return(true)
       end
 
-      context 'when there is a winner' do
+      context 'and there is a winner' do
         it 'returns false' do
           allow(game.board).to receive(:winner?).and_return(true)
           expect(game.tie_game?).to be false
         end
       end
 
-      context 'when there is not a winner' do
+      context 'and there is not a winner' do
         it 'returns true' do
           allow(game.board).to receive(:winner?).and_return(false)
           expect(game.tie_game?).to be true
@@ -188,14 +188,14 @@ describe Game do
         allow(game.board).to receive(:full?).and_return(false)
       end
 
-      context 'when there is a winner' do
+      context 'and there is a winner' do
         it 'returns false' do
           allow(game.board).to receive(:winner?).and_return(true)
           expect(game.tie_game?).to be false
         end
       end
 
-      context 'when there is not a winner' do
+      context 'and there is not a winner' do
         it 'returns false' do
           allow(game.board).to receive(:winner?).and_return(false)
           expect(game.tie_game?).to be false
