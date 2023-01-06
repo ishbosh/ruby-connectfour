@@ -11,7 +11,7 @@ class Board
   end
 
   def show
-    puts "\n " + show_column_numbers
+    puts "\n" + show_column_numbers
     grid.each do |row|
       show_row(row)
     end
